@@ -1,3 +1,4 @@
 import Container from "./Container";
+import KeyBoard from "./KeyBoard";
 
-export { Container }
+export { Container, KeyBoard }
