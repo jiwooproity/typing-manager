@@ -1,35 +1,69 @@
-const KeyLineElement = (value: string, index: number): JSX.Element => {
-    return (
-        <button className={value} key={index}>
-            <span>{value}</span>
-        </button>
-    )
-} 
+import { useEffect, useState } from "react";
 
-const KeyBoard = () => {
-    const oneLine: string[] = ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'];
-    const twoLine: string[] = ['Tab', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', '\\'];
-    const threeLine: string[] = ['CapsLock', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', '\'', 'Enter'];
-    const fourLine: string[] = ['Shift', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/', 'Shift'];
-    const fiveLine: string[] = ['Ctrl', 'Win', 'Alt', 'Spacebar', 'Alt', 'Fn', 'Doc', 'Ctrl'];
+import { KeyDataIF } from "@/utils/keyInterface";
+import { getKeyCapInterface } from "@/utils/keyInterface";
+
+const KeyDown = 'keydown' as const;
+// const keyUp = 'keyup' as const;
+
+const KeyBoard = (): JSX.Element => {
+    const [pressedStatus, setPressedStatus] = useState<{ [key: string]: boolean }>({});
+
+    const keyLineArray = ['oneLine', 'twoLine', 'threeLine', 'fourLine', 'fiveLine'];
+    const keyLineInterface = keyLineArray.map((value) => getKeyCapInterface(value));
+
+    const onKeyEvent = (e: KeyboardEvent) => {        
+        e.preventDefault();
+        
+        if(e.type === KeyDown) {
+            setPressedStatus((state) => { return { ...state, [e.code]: true } })
+        }
+    }
+
+    const onResetEvent = () => {
+        setPressedStatus({});
+    }
+
+    useEffect(() => {        
+        document.addEventListener("keydown", onKeyEvent);
+
+        return () => {
+            document.removeEventListener("keydown", onKeyEvent);
+        }
+    }, []);
+
+    const KeyLineElement = (value: KeyDataIF, index: number): JSX.Element => {
+        const keyPressed = pressedStatus[value.keyCode] || false;
+
+        return (
+            <button className={`${value.keyCap}${keyPressed ? " active" : ""}`} key={index}>
+                <span>{value.keyCap}</span>
+            </button>
+        )
+    } 
 
     return (
-        <div className="keyboard_box">
-            <div className="keyboard_row one">
-                {oneLine.map(KeyLineElement)}
+        <div className="keyboard_area">
+            <div className="keyboard_box">
+                <div className="keyboard_row one">
+                    {keyLineInterface[0].map(KeyLineElement)}
+                </div>
+                <div className="keyboard_row two">
+                    {keyLineInterface[1].map(KeyLineElement)}
+                </div>
+                <div className="keyboard_row three">
+                    {keyLineInterface[2].map(KeyLineElement)}
+                </div>
+                <div className="keyboard_row four">
+                    {keyLineInterface[3].map(KeyLineElement)}
+                </div>
+                <div className="keyboard_row five">
+                    {keyLineInterface[4].map(KeyLineElement)}
+                </div>
             </div>
-            <div className="keyboard_row two">
-                {twoLine.map(KeyLineElement)}
-            </div>
-            <div className="keyboard_row three">
-                {threeLine.map(KeyLineElement)}
-            </div>
-            <div className="keyboard_row four">
-                {fourLine.map(KeyLineElement)}
-            </div>
-            <div className="keyboard_row five">
-                {fiveLine.map(KeyLineElement)}
-            </div>
+            <button onClick={onResetEvent}>
+                <span>Reset</span>
+            </button>
         </div>
     )
 }

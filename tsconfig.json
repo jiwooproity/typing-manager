@@ -13,7 +13,7 @@
           "node_modules/*/src/index",
           "node_modules/*/lib/sinon"
         ],
-        "@/*": ["src/*/index"],
+        "@/*": ["src/*", "src/*/index"],
       }
     },
     "include": ["src"],
