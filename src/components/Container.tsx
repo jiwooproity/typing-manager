@@ -3,7 +3,7 @@ import KeyBoard from "./KeyBoard";
 const Container = () => {
     return (
         <div className="container">
-            <KeyBoard />
+            <div className="wrapper"><KeyBoard /></div>
         </div>
     )
 }
