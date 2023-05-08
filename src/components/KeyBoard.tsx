@@ -9,7 +9,7 @@ const KeyDown = 'keydown' as const;
 const KeyBoard = (): JSX.Element => {
     const [pressedStatus, setPressedStatus] = useState<{ [key: string]: boolean }>({});
 
-    const keyLineArray = ['oneLine', 'twoLine', 'threeLine', 'fourLine', 'fiveLine'];
+    const keyLineArray = ['topLine', 'oneLine', 'twoLine', 'threeLine', 'fourLine', 'fiveLine'];
     const keyLineInterface = keyLineArray.map((value) => getKeyCapInterface(value));
     
     const onKeyEvent = (e: KeyboardEvent) => {        
@@ -48,74 +48,39 @@ const KeyBoard = (): JSX.Element => {
                 <span>{value.keyCap}</span>
             </button>
         )
-    } 
+    }
 
     return (
         <div className="keyboard_area">
             <div className="keyboard_box">
                 <div className="keyboard_top">
                     <div className="keyboard_top_row">
-                        <button>
-                            <span>ESC</span>
-                        </button>
+                        {keyLineInterface[0].filter((val) => val.keyCode === "Escape").map(KeyLineElement)}
                     </div>
                     <div className="keyboard_top_row">
-                        <button>
-                            <span>F1</span>
-                        </button>
-                        <button>
-                            <span>F2</span>
-                        </button>
-                        <button>
-                            <span>F3</span>
-                        </button>
-                        <button>
-                            <span>F4</span>
-                        </button>
+                        {keyLineInterface[0].slice(1, 5).map(KeyLineElement)}
                     </div>
                     <div className="keyboard_top_row">
-                        <button>
-                            <span>F5</span>
-                        </button>
-                        <button>
-                            <span>F6</span>
-                        </button>
-                        <button>
-                            <span>F7</span>
-                        </button>
-                        <button>
-                            <span>F8</span>
-                        </button>
+                        {keyLineInterface[0].slice(5, 9).map(KeyLineElement)}
                     </div>
                     <div className="keyboard_top_row">
-                        <button>
-                            <span>F9</span>
-                        </button>
-                        <button>
-                            <span>F10</span>
-                        </button>
-                        <button>
-                            <span>F11</span>
-                        </button>
-                        <button>
-                            <span>F12</span>
-                        </button>
+                        {keyLineInterface[0].slice(9, 13).map(KeyLineElement)}
                     </div>
                 </div>
                 <div className="keyboard_row one">
-                    {keyLineInterface[0].map(KeyLineElement)}
-                </div>
-                <div className="keyboard_row two">
                     {keyLineInterface[1].map(KeyLineElement)}
                 </div>
-                <div className="keyboard_row three">
+                <div className="keyboard_row two">
                     {keyLineInterface[2].map(KeyLineElement)}
                 </div>
-                <div className="keyboard_row four">
+                <div className="keyboard_row three">
                     {keyLineInterface[3].map(KeyLineElement)}
                 </div>
-                <div className="keyboard_row five">
+                <div className="keyboard_row four">
                     {keyLineInterface[4].map(KeyLineElement)}
+                </div>
+                <div className="keyboard_row five">
+                    {keyLineInterface[5].map(KeyLineElement)}
                 </div>
             </div>
             <button onClick={onResetEvent}>
