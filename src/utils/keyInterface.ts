@@ -13,6 +13,73 @@ export interface KeyInterfaceIF {
 }
 
 export const keyInterface: KeyInterfaceIF = {
+    'topLine': {
+        'Escape': {
+            keyCap: 'ESC',
+            keyCode: 'Escape',
+            pressed: false,
+        },
+        'F1': {
+            keyCap: 'F1',
+            keyCode: 'F1',
+            pressed: false,
+        },
+        'F2': {
+            keyCap: 'F2',
+            keyCode: 'F2',
+            pressed: false,
+        },
+        'F3': {
+            keyCap: 'F3',
+            keyCode: 'F3',
+            pressed: false,
+        },
+        'F4': {
+            keyCap: 'F4',
+            keyCode: 'F4',
+            pressed: false,
+        },
+        'F5': {
+            keyCap: 'F5',
+            keyCode: 'F5',
+            pressed: false,
+        },
+        'F6': {
+            keyCap: 'F6',
+            keyCode: 'F6',
+            pressed: false,
+        },
+        'F7': {
+            keyCap: 'F7',
+            keyCode: 'F7',
+            pressed: false,
+        },
+        'F8': {
+            keyCap: 'F8',
+            keyCode: 'F8',
+            pressed: false,
+        },
+        'F9': {
+            keyCap: 'F9',
+            keyCode: 'F9',
+            pressed: false,
+        },
+        'F10': {
+            keyCap: 'F10',
+            keyCode: 'F10',
+            pressed: false,
+        },
+        'F11': {
+            keyCap: 'F11',
+            keyCode: 'F11',
+            pressed: false,
+        },
+        'F12': {
+            keyCap: 'F12',
+            keyCode: 'F12',
+            pressed: false,
+        },
+    },
     'oneLine': {
         'Backquote': {
             keyCap: '`',
@@ -336,6 +403,7 @@ export const getKeyCapInterface = (lineType: string): KeyDataIF[] => {
 
 export const getKeyInterfaces = (): { [key: string]: KeyDataIF } => {
     return {
+        ...keyInterface.topLine,
         ...keyInterface.oneLine,
         ...keyInterface.twoLine,
         ...keyInterface.threeLine,
