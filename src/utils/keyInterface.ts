@@ -379,11 +379,6 @@ export const keyInterface: KeyInterfaceIF = {
             keyCode: 'AltRight',
             pressed: false,
         },
-        'Fn': {
-            keyCap: 'Fn',
-            keyCode: 'Fn',
-            pressed: false,
-        },
         'ContextMenu': {
             keyCap: 'Menu',
             keyCode: 'ContextMenu',
