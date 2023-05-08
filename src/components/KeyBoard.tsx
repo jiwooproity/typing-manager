@@ -44,7 +44,7 @@ const KeyBoard = (): JSX.Element => {
         const keyPressed = pressedStatus[value.keyCode] || false;
 
         return (
-            <button id={`${value.keyCode}`} className={`${value.keyCap}${keyPressed ? " active" : ""}`} key={index}>
+            <button id={`${value.keyCode}`} className={`${value.keyCap}${keyPressed ? " press active" : ""}`} key={index}>
                 <span>{value.keyCap}</span>
             </button>
         )
