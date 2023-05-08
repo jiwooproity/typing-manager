@@ -4,7 +4,7 @@
     align-items: center;
 
     > button {
-        width: 920px;
+        width: 100%;
         padding: 10px;
         margin: 30px 0px 5px 0px;
         
@@ -67,11 +67,35 @@
         display: flex;
 
         .active {
-            background: linear-gradient(180deg, rgb(193, 226, 233), rgb(142, 165, 204));
+            background: linear-gradient(180deg, rgb(172, 225, 237), rgb(140, 119, 227));
         }
     
         .press {
-            background: linear-gradient(180deg, rgb(233, 211, 193), rgb(204, 170, 142)); 
+            background: linear-gradient(180deg, rgb(231, 204, 183), rgb(231, 86, 86));
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 3px;
+                left: 4px;
+                bottom: 6px;
+                right: 5px;
+                background: linear-gradient(90deg, rgb(255, 255, 255), rgb(228, 228, 228));
+                border-radius: 5px;
+                box-shadow: -5px -5px 5px rgba(235, 235, 235, 0.25);
+                border-left: 1px solid rgba(188, 188, 188, 0.267);
+                border-bottom: 1px solid rgba(188, 188, 188, 0.267);
+                border-top: 1px solid rgba(188, 188, 188, 0.6);
+            }
+    
+            span {
+                font-size: 13px;
+                position: absolute;
+                top: 8px;
+                left: 12px;
+                color: #000000;
+                font-style: normal;
+            }
         }
 
         > button {
@@ -158,11 +182,35 @@
     display: flex;
 
     .active {
-        background: linear-gradient(180deg, rgb(193, 226, 233), rgb(142, 165, 204));
+        background: linear-gradient(180deg, rgb(172, 225, 237), rgb(140, 119, 227));
     }
 
     .press {
-        background: linear-gradient(180deg, rgb(233, 211, 193), rgb(204, 170, 142)); 
+        background: linear-gradient(180deg, rgb(231, 204, 183), rgb(231, 86, 86)); 
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 4px;
+            bottom: 6px;
+            right: 5px;
+            background: linear-gradient(90deg, rgb(255, 255, 255), rgb(228, 228, 228));
+            border-radius: 5px;
+            box-shadow: -5px -5px 5px rgba(235, 235, 235, 0.25);
+            border-left: 1px solid rgba(188, 188, 188, 0.267);
+            border-bottom: 1px solid rgba(188, 188, 188, 0.267);
+            border-top: 1px solid rgba(188, 188, 188, 0.6);
+        }
+
+        span {
+            font-size: 13px;
+            position: absolute;
+            top: 8px;
+            left: 12px;
+            color: #000000;
+            font-style: normal;
+        }
     }
 
     > button {
