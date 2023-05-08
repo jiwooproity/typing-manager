@@ -12,7 +12,7 @@ const KeyBoard = (): JSX.Element => {
     const keyLineArray = ['topLine', 'oneLine', 'twoLine', 'threeLine', 'fourLine', 'fiveLine'];
     const keyLineInterface = keyLineArray.map((value) => getKeyCapInterface(value));
     
-    const onKeyEvent = (e: KeyboardEvent) => {        
+    const onKeyDown = (e: KeyboardEvent) => {        
         e.preventDefault();
         if(e.type === KeyDown && !pressedStatus[e.code]) setPressedStatus((state) => { return { ...state, [e.code]: true } })
 
@@ -20,10 +20,16 @@ const KeyBoard = (): JSX.Element => {
         if(key) key.classList.add("press");
     }
 
-    const onKeyUp = (e: KeyboardEvent) => {
+    const onKeyUp = (e: KeyboardEvent) => {        
         e.preventDefault();
-        const key = document.getElementById(e.code);
-        if(key) key.classList.remove("press");
+
+        if(e.code === "ShiftLeft" || e.code === "ShiftRight") {
+            const shiftKeys  = [document.getElementById('ShiftLeft'), document.getElementById('ShiftRight')];
+            shiftKeys.forEach((val) => val.classList.remove('press'));
+        } else {
+            const key = document.getElementById(e.code);
+            if(key) key.classList.remove("press");
+        }
     }
 
     const onResetEvent = () => {
@@ -31,11 +37,11 @@ const KeyBoard = (): JSX.Element => {
     }
 
     useEffect(() => {        
-        document.addEventListener("keydown", onKeyEvent);
+        document.addEventListener("keydown", onKeyDown);
         document.addEventListener('keyup', onKeyUp);
 
         return () => {
-            document.removeEventListener("keydown", onKeyEvent);
+            document.removeEventListener("keydown", onKeyDown);
             document.removeEventListener('keyup', onKeyUp);
         }
     }, []);
