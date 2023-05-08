@@ -114,38 +114,6 @@
             overflow: hidden;
             cursor: pointer;
     
-            &.Backspace {
-                width: 140px;
-            }
-    
-            &.Tab {
-                width: 100px;
-            }
-    
-            &.CapsLock {
-                width: 120px;
-            }
-    
-            &.Enter {
-                width: 135px;
-            }
-    
-            &.Shift {
-                width: 158px;
-            }
-    
-            &.Spacebar {
-                width: 450px;
-            }
-    
-            &.Ctrl, &.Win, &.Alt, &.Fn, &.Doc {
-                width: 63.5px;
-            }
-    
-            &.\\ {
-                width: 95px;
-            }
-    
             &::before {
                 content: '';
                 position: absolute;
@@ -250,11 +218,11 @@
         }
 
         &.Spacebar {
-            width: 450px;
+            width: 440px;
         }
 
-        &.Ctrl, &.Win, &.Alt, &.Fn, &.Doc {
-            width: 63.5px;
+        &.Ctrl, &.Win, &.Alt, &.Fn, &.Menu {
+            width: 63.7px;
         }
 
         &.\\ {
