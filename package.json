@@ -2,9 +2,43 @@
   "name": "keyboard-checker",
   "version": "1.0.0",
   "description": "You can test your keyboard key input",
-  "main": "index.js",
+  "main": "public/Main.js",
+  "homepage": "./",
   "scripts": {
-    "start": "webpack-dev-server --open --config ./config/webpack.dev.js"
+    "start": "webpack-dev-server --open --config ./config/webpack.dev.js",
+    "build": "webpack --config ./config/webpack.prod.js",
+    "deploy:win64": "electron-builder --win nsis:x64",
+    "electron-start": "electron ."
+  },
+  "build": {
+    "productName": "KeyBoard - Key Test",
+    "appId": "net.jetalab.ex.startelectron",
+    "asar": true,
+    "dmg": {
+        "title": "KeyBoard - Key Test"
+    },
+    "win": {
+        "target": [
+            {
+                "target": "nsis",
+                "arch": [
+                    "x64",
+                    "ia32"
+                ]
+            }
+        ],
+        "icon": "build/icons/256x256.png"
+    },
+    "nsis": {
+        "oneClick": false,
+        "allowToChangeInstallationDirectory": false,
+        "createDesktopShortcut": true
+    },
+    "directories": {
+        "buildResources": "./resources/installer/",
+        "output": "./dist/",
+        "app": "."
+    }
   },
   "author": "",
   "license": "ISC",
@@ -28,6 +62,8 @@
     "css-loader": "^6.7.3",
     "css-minimizer-webpack-plugin": "^5.0.0",
     "dotenv": "^16.0.3",
+    "electron": "^24.2.0",
+    "electron-builder": "^23.6.0",
     "html-webpack-plugin": "^5.5.1",
     "mini-css-extract-plugin": "^2.7.5",
     "node-sass": "^8.0.0",
