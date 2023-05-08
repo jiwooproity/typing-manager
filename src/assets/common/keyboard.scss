@@ -66,6 +66,14 @@
     .keyboard_top_row {
         display: flex;
 
+        .active {
+            background: linear-gradient(180deg, rgb(193, 226, 233), rgb(142, 165, 204));
+        }
+    
+        .press {
+            background: linear-gradient(180deg, rgb(233, 211, 193), rgb(204, 170, 142)); 
+        }
+
         > button {
             width: 55px;
             height: 55px;
