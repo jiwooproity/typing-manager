@@ -68,12 +68,16 @@
         display: flex;
 
         .active {
-            background: linear-gradient(180deg, rgb(172, 225, 237), rgb(140, 119, 227));
+            background: linear-gradient(180deg, rgb(100, 227, 255), rgb(140, 119, 227));
+    
+            &::before {
+                background: linear-gradient(90deg, rgb(255, 255, 255), rgb(199, 209, 234));
+            }
         }
     
         .press {
-            background: linear-gradient(180deg, rgb(231, 204, 183), rgb(231, 86, 86));
-
+            background: linear-gradient(180deg, rgb(255, 154, 76), rgb(227, 52, 52)); 
+    
             &::before {
                 content: '';
                 position: absolute;
@@ -81,7 +85,7 @@
                 left: 4px;
                 bottom: 6px;
                 right: 5px;
-                background: linear-gradient(90deg, rgb(255, 255, 255), rgb(228, 228, 228));
+                background: linear-gradient(90deg, rgb(255, 255, 255), rgb(246, 215, 197));
                 border-radius: 5px;
                 box-shadow: -5px -5px 5px rgba(235, 235, 235, 0.25);
                 border-left: 1px solid rgba(188, 188, 188, 0.267);
@@ -98,6 +102,7 @@
                 font-style: normal;
             }
         }
+    
 
         > button {
             width: 55px;
