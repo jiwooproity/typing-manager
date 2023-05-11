@@ -6,29 +6,50 @@ import { getKeyCapInterface } from "@/utils/keyInterface";
 const KeyDown = 'keydown' as const;
 // const keyUp = 'keyup' as const;
 
+const SLEFT = 'ShiftLeft' as const;
+const SRIGHT = 'ShiftRight' as const;
+
+interface ChangeActiveIF {
+    code: string,
+    active: boolean
+}
+
 const KeyBoard = (): JSX.Element => {
     const [pressedStatus, setPressedStatus] = useState<{ [key: string]: boolean }>({});
 
     const keyLineArray = ['topLine', 'oneLine', 'twoLine', 'threeLine', 'fourLine', 'fiveLine'];
     const keyLineInterface = keyLineArray.map((value) => getKeyCapInterface(value));
+
+    const onChangeActive = ({ code, active }: ChangeActiveIF) => {
+        const key = document.getElementById(code);
+
+        if(key) {
+            active ? key.classList.add('press') : key.classList.remove('press');
+        }
+    }
     
     const onKeyDown = (e: KeyboardEvent) => {        
         e.preventDefault();
-        if(e.type === KeyDown && !pressedStatus[e.code]) setPressedStatus((state) => { return { ...state, [e.code]: true } })
 
-        const key = document.getElementById(e.code);
-        if(key) key.classList.add("press");
+        if(e.type === KeyDown) {
+            !pressedStatus[e.code] && setPressedStatus((state) => { return { ...state, [e.code]: true } })
+        }
+
+        onChangeActive({ code: e.code, active: true });
     }
 
     const onKeyUp = (e: KeyboardEvent) => {        
         e.preventDefault();
 
-        if(e.code === "ShiftLeft" || e.code === "ShiftRight") {
-            const shiftKeys  = [document.getElementById('ShiftLeft'), document.getElementById('ShiftRight')];
-            shiftKeys.forEach((val) => val.classList.remove('press'));
-        } else {
-            const key = document.getElementById(e.code);
-            if(key) key.classList.remove("press");
+        switch (e.code) {
+            case SLEFT:
+            case SRIGHT:
+                const SHIFTKEYS = [SLEFT, SRIGHT];
+                SHIFTKEYS.forEach((val) => onChangeActive({ code: val, active: false }));
+                break;
+            default:
+                onChangeActive({ code: e.code, active: false });
+                break;
         }
     }
 
