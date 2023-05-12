@@ -1,6 +1,6 @@
 {
   "name": "keyboard-checker",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "You can test your keyboard key input",
   "main": "public/Main.js",
   "homepage": "./",

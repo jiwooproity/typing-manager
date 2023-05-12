@@ -35,6 +35,9 @@ const KeyBoard = ({ state, onKeyDown, onKeyUp, onReset }: ComponentPropsType): J
 
     return (
         <div className="keyboard_area">
+            <div className="keyboard_scan-rate_area">
+                <ul id="keyboard_scan-rate_ul" className="keyboard_scan-rate_ul"></ul>
+            </div>
             <div className="keyboard_box">
                 <div className="keyboard_top">
                     <KeyBoardRow className="keyboard_top_row" createElement={KeyLineElement} data={topLine.filter((val) => val.keyCode === "Escape")} />
