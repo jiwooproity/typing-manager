@@ -3,25 +3,63 @@
     flex-direction: column;
     align-items: center;
 
-    .keyboard_scan-rate_area {
+    .keyboard_scan-box {
         width: 100%;
-        min-height: calc(24px * 5);
-        max-height: calc(24px * 5);
-        overflow-y: scroll;
-        padding: 0px 5px 0px 0px;
-        margin: 5px 0px 0px 0px;
+        display: flex;
+        justify-content: space-between;
+        gap: 5px;
+    
+        .keyboard_scan-rate_area {
+            width: 40%;
+            min-height: calc(24px * 5);
+            max-height: calc(24px * 5);
+            overflow-y: scroll;
+            padding: 0px 5px 0px 0px;
+            margin: 5px 0px 0px 0px;
+    
+            .keyboard_scan-rate_ul {
+                list-style: none;
+    
+                > li {
+                    border-radius: 5px;
+                    padding: 2px 5px;
+                    margin: 2px 0px;
+                    font-size: 12px;
+                    border: 1px solid rgba(54, 54, 54, 0.5);
+                    font-style: normal;
+                    font-weight: 700;
+                }
+            }
+        }
 
-        .keyboard_scan-rate_ul {
-            list-style: none;
+        .keyboard_memo_area {
+            width: 60%;
+            min-height: calc(24px * 5);
+            max-height: calc(24px * 5);
+            padding: 0px 0px 0px 0px;
+            margin: 5px 0px 0px 0px;
 
-            > li {
-                border-radius: 5px;
-                padding: 2px 5px;
-                margin: 2px 0px;
-                font-size: 12px;
+            > textarea {
+                width: 100%;
+                height: 100%;
+                padding: 5px;
                 border: 1px solid rgba(54, 54, 54, 0.5);
-                font-style: normal;
-                font-weight: 700;
+                border-radius: 5px;
+                resize: none;
+
+                &:focus {
+                    outline: none;
+                }
+            }
+
+            > textarea::-webkit-scrollbar-thumb {
+                background-color: rgba(54, 54, 54, 1);
+                border-radius: 5px;
+            }
+
+            > textarea::-webkit-scrollbar {
+                width: 5px;
+                height: 8px;
             }
         }
     }

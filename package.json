@@ -7,6 +7,7 @@
   "scripts": {
     "start": "webpack-dev-server --open --config ./config/webpack.dev.js",
     "build": "webpack --config ./config/webpack.prod.js",
+    "deploy:osx": "electron-builder --win --mac",
     "deploy:win64": "electron-builder --win nsis:x64",
     "electron-start": "electron ."
   },
@@ -16,6 +17,11 @@
     "asar": true,
     "dmg": {
         "title": "KeyBoard - Key Test"
+    },
+    "mac": {
+      "target": [
+          "default"
+      ]
     },
     "win": {
         "target": [
