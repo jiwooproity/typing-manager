@@ -1,18 +1,25 @@
 import { KeyDataIF } from "@/utils/keyInterface";
+import { CSSProperties } from "react";
 
 type RowComponentTypes = {
-    className: string;
+    className?: string;
     data: KeyDataIF[];
-    createElement: (value: KeyDataIF, index: number) => JSX.Element;
+    style?: CSSProperties;
+    createElement?: (value: KeyDataIF, index: number) => JSX.Element;
 }
 
-const KeyBoardRow = ({ className, data, createElement }: RowComponentTypes): JSX.Element => {
+const KeyBoardRow = ({ className, data, style, createElement }: RowComponentTypes): JSX.Element => {
 
     return (
-        <div className={className}>
+        <div className={className} style={style}>
             {data.map(createElement)}
         </div>
     )
+}
+
+KeyBoardRow.defaultProps = {
+    className: "",
+    style: {}
 }
 
 export default KeyBoardRow;

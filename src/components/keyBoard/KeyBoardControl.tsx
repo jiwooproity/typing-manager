@@ -23,7 +23,7 @@ const KeyBoardControl = (): JSX.Element => {
         }
     }
     
-    const onKeyDown = (e: KeyboardEvent) => {        
+    const onKeyDown = (e: KeyboardEvent) => { 
         e.preventDefault();
 
         if (!keyPerformance[e.code]) {
@@ -54,7 +54,7 @@ const KeyBoardControl = (): JSX.Element => {
         
         const getTimeAreaElement = document.querySelector('#keyboard_scan-rate_ul');
         const createListElement = document.createElement('li');
-        const performanceContent = document.createTextNode(`${e.key}: ${heldTime}ms`);
+        const performanceContent = document.createTextNode(`${e.code}: ${heldTime}ms`);
         createListElement.appendChild(performanceContent);
         getTimeAreaElement.insertBefore(createListElement, getTimeAreaElement.firstChild);
 

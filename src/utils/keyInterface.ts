@@ -219,7 +219,7 @@ export const keyInterface: KeyInterfaceIF = {
             pressed: false,
         },
         'Backslash': {
-            keyCap: '\\',
+            keyCap: '| \\',
             keyCode: 'Backslash',
             pressed: false,
         },
@@ -389,7 +389,82 @@ export const keyInterface: KeyInterfaceIF = {
             keyCode: 'ControlRight',
             pressed: false,
         }
-    }
+    },
+    'rightTop': {
+        'PrintScreen': {
+            keyCap: 'PrtSc',
+            keyCode: 'PrintScreen',
+            pressed: false,
+        },
+        'ScrollLock': {
+            keyCap: 'ScrLk',
+            keyCode: 'ScrollLock',
+            pressed: false,
+        },
+        'Pause': {
+            keyCap: 'Pause',
+            keyCode: 'Pause',
+            pressed: false,
+        },
+    },
+    'rightOneLine': {
+        'Insert': {
+            keyCap: 'Ins',
+            keyCode: 'Insert',
+            pressed: false,
+        },
+        'Home': {
+            keyCap: 'Home',
+            keyCode: 'Home',
+            pressed: false,
+        },
+        'PageUp': {
+            keyCap: 'PgUp',
+            keyCode: 'PageUp',
+            pressed: false,
+        },
+    },
+    'rightTwoLine': {
+        'Delete': {
+            keyCap: 'Del',
+            keyCode: 'Delete',
+            pressed: false,
+        },
+        'End': {
+            keyCap: 'End',
+            keyCode: 'End',
+            pressed: false,
+        },
+        'PageDown': {
+            keyCap: 'PgDn',
+            keyCode: 'PageDown',
+            pressed: false,
+        },
+    },
+    'rightThreeLine': {
+        'ArrowUp': {
+            keyCap: '↑',
+            keyCode: 'ArrowUp',
+            pressed: false,
+        },
+    },
+    'rightFourLine': {
+        'ArrowLeft': {
+            keyCap: '←',
+            keyCode: 'ArrowLeft',
+            pressed: false,
+        },
+        'ArrowDown': {
+            keyCap: '↓',
+            keyCode: 'ArrowDown',
+            pressed: false,
+        },
+        'ArrowRight': {
+            keyCap: '→',
+            keyCode: 'ArrowRight',
+            pressed: false,
+        },
+    },
 }
 
 export const getKeyCapInterface = (lineType: string): KeyDataIF[] => {
@@ -403,5 +478,6 @@ export const getKeyInterfaces = (): { [key: string]: KeyDataIF } => {
         ...keyInterface.twoLine,
         ...keyInterface.threeLine,
         ...keyInterface.fourLine,
+        ...keyInterface.rightTop,
     }
 }

@@ -24,11 +24,19 @@
 
 .keyboard_box {
     display: flex;
-    flex-direction: column;
+    gap: 15px;
     margin: 5px;
     padding: 10px;
     border-radius: 5px;
     background-color: rgb(206, 206, 206);
+}
+
+.keyboard_left-area {
+    width: 100%;
+}
+
+.keyboard_right-area {
+    width: 100%;
 }
 
 .keyboard_top {
@@ -36,6 +44,7 @@
     height: 55px;
     margin: 0px 0px 15px 0px;
     display: flex;
+    justify-content: space-between;
     gap: 48.2px;
 
     .keyboard_top_row {
@@ -68,10 +77,10 @@
             }
     
             span {
-                font-size: 13px;
+                font-size: 12px;
                 position: absolute;
                 top: 8px;
-                left: 12px;
+                left: 10px;
                 color: #000000;
                 font-style: normal;
             }
@@ -114,9 +123,10 @@
             }
     
             > span {
+                font-size: 11.5px;
                 position: absolute;
                 top: 7px;
-                left: 11px;
+                left: 9px;
                 color: #000000;
                 font-style: normal;
             }
@@ -129,6 +139,7 @@
         width: 100%;
         height: 55px;
         display: flex;
+        justify-content: space-between;
     
         .active {
             background: linear-gradient(180deg, rgb(100, 227, 255), rgb(140, 119, 227));
@@ -157,10 +168,10 @@
             }
     
             span {
-                font-size: 13px;
+                font-size: 12px;
                 position: absolute;
                 top: 8px;
-                left: 12px;
+                left: 10px;
                 color: #000000;
                 font-style: normal;
             }
@@ -234,9 +245,10 @@
             }
     
             > span {
+                font-size: 11.5px;
                 position: absolute;
                 top: 7px;
-                left: 11px;
+                left: 9px;
                 color: #000000;
                 font-style: normal;
             }
