@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import { KeyDataIF } from "@/utils/keyInterface";
 import { getKeyCapInterface } from "@/utils/keyInterface";
@@ -6,22 +6,22 @@ import { getKeyCapInterface } from "@/utils/keyInterface";
 import { Button } from "@/common";
 import { KeyBoardRow } from "@/components";
 
-type ComponentPropsType = {
-    state: { [key: string]: boolean };
-    onKeyDown: (e: KeyboardEvent) => void;
-    onKeyUp: (e: KeyboardEvent) => void;
-    onReset: () => void;
+interface ComponentPropsType {
+    state: { [key: string]: boolean },
+    onKeyDown: (e: KeyboardEvent) => void,
+    onKeyUp: (e: KeyboardEvent) => void,
+    onReset: () => void,
+    onFocus: () => void,
+    onBlur: () => void,
 }
 
-const KeyBoard = ({ state, onKeyDown, onKeyUp, onReset }: ComponentPropsType): JSX.Element => {
+const KeyBoard = ({ state, onKeyDown, onKeyUp, onReset, onFocus, onBlur }: ComponentPropsType): JSX.Element => {
     const keyLineArray = ['topLine', 'oneLine', 'twoLine', 'threeLine', 'fourLine', 'fiveLine', 'rightTop', 'rightOneLine', 'rightTwoLine', 'rightThreeLine', 'rightFourLine'];
     const [topLine, oneLine, twoLine, threeLine, fourLine, fiveLine, rightTop, rightOneLine, rightTwoLine, rightThreeLine, rightFourLine]: KeyDataIF[][] = keyLineArray.map((value) => getKeyCapInterface(value));
 
-    useEffect(() => {        
+    useEffect(() => {       
         document.addEventListener("keydown", onKeyDown);
         document.addEventListener('keyup', onKeyUp);
-
-        window.addEventListener("keydown", (e) => {console.log(e)})
 
         return () => {
             document.removeEventListener("keydown", onKeyDown);
@@ -66,11 +66,16 @@ const KeyBoard = ({ state, onKeyDown, onKeyUp, onReset }: ComponentPropsType): J
                     </div>
                 </div>
             </div>
-            <div className="keyboard_scan-rate_area">
-                <ul id="keyboard_scan-rate_ul" className="keyboard_scan-rate_ul"></ul>
+            <div className="keyboard_scan-box">
+                <div className="keyboard_scan-rate_area">
+                    <ul id="keyboard_scan-rate_ul" className="keyboard_scan-rate_ul"></ul>
+                </div>
+                <div className="keyboard_memo_area">
+                    <textarea onFocus={onFocus} onBlur={onBlur}/>
+                </div>
             </div>
             <div className="keyboard_button-area">
-                <Button buttonText="Reset" onClick={onReset} />
+                <Button buttonText="Reset" onClick={onReset}/>
             </div>
         </div>
     )
