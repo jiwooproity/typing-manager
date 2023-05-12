@@ -11,6 +11,7 @@ type ChangeActiveIF = {
 }
 
 let keyPerformance: { [key: string]: number } = {};
+let inputFocus: boolean = false;
 
 const KeyBoardControl = (): JSX.Element => {
     const [pressedStatus, setPressedStatus] = useState<{ [key: string]: boolean }>({});
@@ -22,21 +23,44 @@ const KeyBoardControl = (): JSX.Element => {
             active ? key.classList.add('press') : key.classList.remove('press');
         }
     }
+
+    const onFocus = () => {
+        inputFocus = true;
+    }
+
+    const onBlur = () => {
+        inputFocus = false;
+    }
     
     const onKeyDown = (e: KeyboardEvent) => { 
-        e.preventDefault();
+        if(!inputFocus) {
+            e.preventDefault();
+        }
 
         if (!keyPerformance[e.code]) {
             keyPerformance[e.code] = performance.now()    
         };
 
-        !pressedStatus[e.code] && setPressedStatus((state) => { return { ...state, [e.code]: true } })
+        if(!pressedStatus[e.code]) {
+            setPressedStatus((state) => { return { ...state, [e.code]: true } })
+        }
 
         onChangeActive({ code: e.code, active: true });
     }
 
     const onKeyUp = (e: KeyboardEvent) => {        
-        e.preventDefault();
+        if(!inputFocus) {
+            e.preventDefault();
+
+            let upTime = performance.now();
+            let heldTime = Math.ceil(upTime - keyPerformance[e.code]);
+            
+            const getTimeAreaElement = document.querySelector('#keyboard_scan-rate_ul');
+            const createListElement = document.createElement('li');
+            const performanceContent = document.createTextNode(`${e.code}: ${heldTime}ms`);
+            createListElement.appendChild(performanceContent);
+            getTimeAreaElement.insertBefore(createListElement, getTimeAreaElement.firstChild);
+        }
 
         switch (e.code) {
             case SLEFT:
@@ -49,15 +73,6 @@ const KeyBoardControl = (): JSX.Element => {
                 break;
         }
 
-        let upTime = performance.now();
-        let heldTime = Math.ceil(upTime - keyPerformance[e.code]);
-        
-        const getTimeAreaElement = document.querySelector('#keyboard_scan-rate_ul');
-        const createListElement = document.createElement('li');
-        const performanceContent = document.createTextNode(`${e.code}: ${heldTime}ms`);
-        createListElement.appendChild(performanceContent);
-        getTimeAreaElement.insertBefore(createListElement, getTimeAreaElement.firstChild);
-
         keyPerformance[e.code] = null;
     }
 
@@ -67,7 +82,7 @@ const KeyBoardControl = (): JSX.Element => {
     }
 
     return (
-        <KeyBoard state={pressedStatus} onKeyDown={onKeyDown} onKeyUp={onKeyUp} onReset={onReset} />
+        <KeyBoard state={pressedStatus} onKeyDown={onKeyDown} onKeyUp={onKeyUp} onReset={onReset} onFocus={onFocus} onBlur={onBlur}/>
     )
 }
 
