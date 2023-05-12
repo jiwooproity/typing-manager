@@ -4,8 +4,8 @@ const url = require('url');
 
 function createWindow() {
     const win = new BrowserWindow({
-        width: 1200,
-        height: 600,
+        width: 1050,
+        height: 560,
         webPreferences: {
             nodeIntegration: true,
             enableRemoteModule: true,

@@ -37,9 +37,6 @@ const KeyBoard = ({ state, onKeyDown, onKeyUp, onReset }: ComponentPropsType): J
 
     return (
         <div className="keyboard_area">
-            <div className="keyboard_scan-rate_area">
-                <ul id="keyboard_scan-rate_ul" className="keyboard_scan-rate_ul"></ul>
-            </div>
             <div className="keyboard_box">
                 <div className="keyboard_left-area">
                     <div className="keyboard_top">
@@ -64,10 +61,13 @@ const KeyBoard = ({ state, onKeyDown, onKeyUp, onReset }: ComponentPropsType): J
                         <KeyBoardRow className="keyboard_row one"   createElement={KeyLineElement} data={rightOneLine} />
                         <KeyBoardRow className="keyboard_row two"   createElement={KeyLineElement} data={rightTwoLine} />
                         <KeyBoardRow className="keyboard_row three" createElement={KeyLineElement} data={[]}/>
-                        <KeyBoardRow className="keyboard_row four"  createElement={KeyLineElement} data={rightThreeLine} style={{ width: '180px', justifyContent: 'center' }}/>
+                        <KeyBoardRow className="keyboard_row four"  createElement={KeyLineElement} data={rightThreeLine} style={{ width: '150px', justifyContent: 'center' }}/>
                         <KeyBoardRow className="keyboard_row five"  createElement={KeyLineElement} data={rightFourLine} />
                     </div>
                 </div>
+            </div>
+            <div className="keyboard_scan-rate_area">
+                <ul id="keyboard_scan-rate_ul" className="keyboard_scan-rate_ul"></ul>
             </div>
             <div className="keyboard_button-area">
                 <Button buttonText="Reset" onClick={onReset} />
