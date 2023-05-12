@@ -5,7 +5,7 @@ const KeyDown = 'keydown' as const;
 const SLEFT = 'ShiftLeft' as const;
 const SRIGHT = 'ShiftRight' as const;
 
-export type ChangeActiveIF = {
+type ChangeActiveIF = {
     code: string,
     active: boolean
 }

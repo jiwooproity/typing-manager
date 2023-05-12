@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { KeyDataIF } from "@/utils/keyInterface";
 import { getKeyCapInterface } from "@/utils/keyInterface";
@@ -30,11 +30,7 @@ const KeyBoard = ({ state, onKeyDown, onKeyUp, onReset }: ComponentPropsType): J
     const KeyLineElement = (value: KeyDataIF, index: number): JSX.Element => {
         const keyPressed = state[value.keyCode] || false;
 
-        return (
-            <button id={`${value.keyCode}`} className={`${value.keyCap}${keyPressed ? " press active" : ""}`} key={index}>
-                <span>{value.keyCap}</span>
-            </button>
-        )
+        return <Button id={value.keyCode} key={index} className={`${value.keyCap}${keyPressed ? " press active" : ""}`} buttonText={value.keyCap} />
     }
 
     return (

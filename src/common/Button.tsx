@@ -1,18 +1,22 @@
 type ButtonPropsType = {
+    id?: string;
+    key?: number;
     className?: string;
     buttonText: string;
-    onClick: () => void;
+    onClick?: () => void;
 }
 
-const Button = ({ className, buttonText, onClick }: ButtonPropsType): JSX.Element => {
+const Button = ({ id, key, className, buttonText, onClick }: ButtonPropsType): JSX.Element => {
     return (
-        <button className={className} onClick={onClick}>
+        <button id={id} key={key} className={className} onClick={onClick}>
             <span>{buttonText}</span>
         </button>
     )
 }
 
 Button.defaultProps = {
+    id: "",
+    key: "",
     className: "",
 }
 
