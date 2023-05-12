@@ -10,6 +10,8 @@ type ChangeActiveIF = {
     active: boolean
 }
 
+let keyPerformance: { [key: string]: number } = {};
+
 const KeyBoardControl = (): JSX.Element => {
     const [pressedStatus, setPressedStatus] = useState<{ [key: string]: boolean }>({});
 
@@ -24,15 +26,17 @@ const KeyBoardControl = (): JSX.Element => {
     const onKeyDown = (e: KeyboardEvent) => {        
         e.preventDefault();
 
-        if(e.type === KeyDown) {
-            !pressedStatus[e.code] && setPressedStatus((state) => { return { ...state, [e.code]: true } })
-        }
+        if (!keyPerformance[e.code]) {
+            keyPerformance[e.code] = performance.now()    
+        };
+
+        !pressedStatus[e.code] && setPressedStatus((state) => { return { ...state, [e.code]: true } })
 
         onChangeActive({ code: e.code, active: true });
     }
 
     const onKeyUp = (e: KeyboardEvent) => {        
-        e.preventDefault();        
+        e.preventDefault();
 
         switch (e.code) {
             case SLEFT:
@@ -44,6 +48,17 @@ const KeyBoardControl = (): JSX.Element => {
                 onChangeActive({ code: e.code, active: false });
                 break;
         }
+
+        let upTime = performance.now();
+        let heldTime = Math.ceil(upTime - keyPerformance[e.code]);
+        
+        const getTimeAreaElement = document.querySelector('#keyboard_scan-rate_ul');
+        const createListElement = document.createElement('li');
+        const performanceContent = document.createTextNode(`${e.key}: ${heldTime}ms`);
+        createListElement.appendChild(performanceContent);
+        getTimeAreaElement.insertBefore(createListElement, getTimeAreaElement.firstChild);
+
+        keyPerformance[e.code] = null;
     }
 
     // 입력 활성화 초기화
