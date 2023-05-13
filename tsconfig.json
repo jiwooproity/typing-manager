@@ -1,22 +1,22 @@
 {
-    "compilerOptions": {
-      "baseUrl": "./",
-      "outDir": "./build",
-      "target": "ES5",
-      "module": "ESNext",
-      "jsx": "preserve",
-      "noImplicitAny": true,
-      "paths": {
-        "*": [
-          "node_modules/*/index",
-          "node_modules/*/dist/index",
-          "node_modules/*/src/index",
-          "node_modules/*/lib/sinon"
-        ],
-        "@/*": ["src/*", "src/*/index"],
-      }
-    },
-    "include": ["src"],
-    "exclude": ["node_modules"]
-  }
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./build",
+    "target": "ES5",
+    "module": "ESNext",
+    "jsx": "preserve",
+    "noImplicitAny": true,
+    "paths": {
+      "*": [
+        "node_modules/*/index",
+        "node_modules/*/dist/index",
+        "node_modules/*/src/index",
+        "node_modules/*/lib/sinon"
+      ],
+      "@/*": ["src/*", "src/*/index"],
+    }
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}
   
