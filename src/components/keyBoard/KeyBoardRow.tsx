@@ -1,7 +1,7 @@
 import { KeyDataIF } from "@/utils/keyInterface";
 import { CSSProperties } from "react";
 
-type RowComponentTypes = {
+interface RowComponentTypes {
     className?: string;
     data: KeyDataIF[];
     style?: CSSProperties;
