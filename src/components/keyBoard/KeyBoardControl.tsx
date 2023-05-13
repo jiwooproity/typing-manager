@@ -2,6 +2,7 @@ import { useState } from "react";
 import { KeyBoard } from "@/components";
 
 import { convertChar } from "@/utils/convertChar";
+import { getKeyName } from "@/utils/keyNames";
 
 const SLEFT = 'ShiftLeft' as const;
 const SRIGHT = 'ShiftRight' as const;
@@ -59,24 +60,21 @@ const KeyBoardControl = (): JSX.Element => {
         if(!inputFocus) {
             e.preventDefault();
 
-            let keyName = e.code !== 'Space' ? e.key : "SpaceBar";
-
+            let keyName = getKeyName(e.code);
             let upTime = performance.now();
             let heldTime = Math.ceil(upTime - keyPerformance[e.code]);       
-            
-            const createListElement = document.createElement('li');
-            const performanceContent = document.createTextNode(`${heldTime}ms`);
 
-            const createButtonElement = document.createElement('button');
             const createKeyTextElement = document.createElement('span');
             const createKeyDummyElement = document.createElement('p');
-
             createKeyTextElement.append(`${convertChar.oneToUpper(keyName)}`);
             createKeyDummyElement.append(`${convertChar.oneToUpper(keyName)}`);
 
+            const createButtonElement = document.createElement('button');
             createButtonElement.appendChild(createKeyTextElement);
             createButtonElement.appendChild(createKeyDummyElement);
 
+            const createListElement = document.createElement('li');
+            const performanceContent = document.createTextNode(`${heldTime}ms`);
             createListElement.appendChild(createButtonElement);
             createListElement.appendChild(performanceContent)
 

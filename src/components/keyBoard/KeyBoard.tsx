@@ -23,9 +23,9 @@ const left = ['oneLine', 'twoLine', 'threeLine', 'fourLine', 'fiveLine'] as cons
 const right = ['rightOneLine', 'rightTwoLine', 'rightThreeLine', 'rightFourLine'] as const;
 
 const KeyBoard = ({ state, text, onChangeText, onKeyDown, onKeyUp, onReset, onTextReset, onFocus, onBlur }: ComponentPropsType): JSX.Element => {
-    const [topLine, rightTop]: KeyDataIF[][] = top.map((val) => getKeyCapInterface(val));
-    const [oneLine, twoLine, threeLine, fourLine, fiveLine]: KeyDataIF[][] = left.map((val) => getKeyCapInterface(val));
-    const [rightOneLine, rightTwoLine, rightThreeLine, rightFourLine]: KeyDataIF[][] = right.map((val) => getKeyCapInterface(val));
+    const [topLine, rightTop]: KeyDataIF[][] = top.map(getKeyCapInterface);
+    const [oneLine, twoLine, threeLine, fourLine, fiveLine]: KeyDataIF[][] = left.map(getKeyCapInterface);
+    const [rightOneLine, rightTwoLine, rightThreeLine, rightFourLine]: KeyDataIF[][] = right.map(getKeyCapInterface);
 
     useEffect(() => {       
         document.addEventListener("keydown", onKeyDown);
@@ -37,40 +37,34 @@ const KeyBoard = ({ state, text, onChangeText, onKeyDown, onKeyUp, onReset, onTe
         }
     }, []);
 
-    const KeyLineElement = (value: KeyDataIF, index: number): JSX.Element => {
-        const keyPressed = state[value.keyCode] || false;
-
-        return <Button id={value.keyCode} key={index} className={`${value.keyCap}${keyPressed ? " press active" : ""}`} buttonText={value.keyCap} />
-    }
-
     return (
         <div className="keyboard_area">
             <div className="keyboard_box">
                 <div className="keyboard_left-area">
                     <div className="keyboard_top">
-                        <KeyBoardRow className="keyboard_top_row"   createElement={KeyLineElement} data={topLine.filter((val) => val.keyCode === "Escape")} />
-                        <KeyBoardRow className="keyboard_top_row"   createElement={KeyLineElement} data={topLine.slice(1, 5)} />
-                        <KeyBoardRow className="keyboard_top_row"   createElement={KeyLineElement} data={topLine.slice(5, 9)} />
-                        <KeyBoardRow className="keyboard_top_row"   createElement={KeyLineElement} data={topLine.slice(9, 13)} />
+                        <KeyBoardRow className="keyboard_top_row"   state={state} data={topLine.filter((val) => val.keyCode === "Escape")} />
+                        <KeyBoardRow className="keyboard_top_row"   state={state} data={topLine.slice(1, 5)} />
+                        <KeyBoardRow className="keyboard_top_row"   state={state} data={topLine.slice(5, 9)} />
+                        <KeyBoardRow className="keyboard_top_row"   state={state} data={topLine.slice(9, 13)} />
                     </div>
                     <div className="keyboard_bottom">
-                        <KeyBoardRow className="keyboard_row one"   createElement={KeyLineElement} data={oneLine} />
-                        <KeyBoardRow className="keyboard_row two"   createElement={KeyLineElement} data={twoLine} />
-                        <KeyBoardRow className="keyboard_row three" createElement={KeyLineElement} data={threeLine} />
-                        <KeyBoardRow className="keyboard_row four"  createElement={KeyLineElement} data={fourLine} />
-                        <KeyBoardRow className="keyboard_row five"  createElement={KeyLineElement} data={fiveLine} />
+                        <KeyBoardRow className="keyboard_row one"   state={state} data={oneLine} />
+                        <KeyBoardRow className="keyboard_row two"   state={state} data={twoLine} />
+                        <KeyBoardRow className="keyboard_row three" state={state} data={threeLine} />
+                        <KeyBoardRow className="keyboard_row four"  state={state} data={fourLine} />
+                        <KeyBoardRow className="keyboard_row five"  state={state} data={fiveLine} />
                     </div>
                 </div>
                 <div className="keyboard_right-area">
                     <div className="keyboard_top">
-                        <KeyBoardRow className="keyboard_top_row"   createElement={KeyLineElement} data={rightTop} />
+                        <KeyBoardRow className="keyboard_top_row"   state={state} data={rightTop} />
                     </div>
                     <div className="keyboard_bottom">
-                        <KeyBoardRow className="keyboard_row one"   createElement={KeyLineElement} data={rightOneLine} />
-                        <KeyBoardRow className="keyboard_row two"   createElement={KeyLineElement} data={rightTwoLine} />
-                        <KeyBoardRow className="keyboard_row three" createElement={KeyLineElement} data={[]}/>
-                        <KeyBoardRow className="keyboard_row four"  createElement={KeyLineElement} data={rightThreeLine} style={{ width: '150px', justifyContent: 'center' }}/>
-                        <KeyBoardRow className="keyboard_row five"  createElement={KeyLineElement} data={rightFourLine} />
+                        <KeyBoardRow className="keyboard_row one"   state={state} data={rightOneLine} />
+                        <KeyBoardRow className="keyboard_row two"   state={state} data={rightTwoLine} />
+                        <KeyBoardRow className="keyboard_row three" state={state} data={[]}/>
+                        <KeyBoardRow className="keyboard_row four"  state={state} data={rightThreeLine} style={{ width: '150px', justifyContent: 'center' }}/>
+                        <KeyBoardRow className="keyboard_row five"  state={state} data={rightFourLine} />
                     </div>
                 </div>
             </div>
@@ -83,7 +77,7 @@ const KeyBoard = ({ state, text, onChangeText, onKeyDown, onKeyUp, onReset, onTe
                 </div>
             </div>
             <div className="keyboard_button-area">
-                <Button className="text-reset btn" buttonText="Text Reset" onClick={onTextReset}/>
+                <Button className="text-reset btn" buttonText="Memo Reset" onClick={onTextReset}/>
                 <Button className="all-reset btn" buttonText="All Reset" onClick={onReset}/>
             </div>
         </div>
