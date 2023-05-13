@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 import { KeyDataIF } from "@/utils/keyInterface";
 import { getKeyCapInterface } from "@/utils/keyInterface";
@@ -7,17 +7,25 @@ import { Button } from "@/common";
 import { KeyBoardRow } from "@/components";
 
 interface ComponentPropsType {
-    state: { [key: string]: boolean },
-    onKeyDown: (e: KeyboardEvent) => void,
-    onKeyUp: (e: KeyboardEvent) => void,
-    onReset: () => void,
-    onFocus: () => void,
-    onBlur: () => void,
+    state: { [key: string]: boolean };
+    text: string;
+    onChangeText: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    onKeyDown: (e: KeyboardEvent) => void;
+    onKeyUp: (e: KeyboardEvent) => void;
+    onReset: () => void;
+    onTextReset: () => void;
+    onFocus: () => void;
+    onBlur: () => void;
 }
 
-const KeyBoard = ({ state, onKeyDown, onKeyUp, onReset, onFocus, onBlur }: ComponentPropsType): JSX.Element => {
-    const keyLineArray = ['topLine', 'oneLine', 'twoLine', 'threeLine', 'fourLine', 'fiveLine', 'rightTop', 'rightOneLine', 'rightTwoLine', 'rightThreeLine', 'rightFourLine'];
-    const [topLine, oneLine, twoLine, threeLine, fourLine, fiveLine, rightTop, rightOneLine, rightTwoLine, rightThreeLine, rightFourLine]: KeyDataIF[][] = keyLineArray.map((value) => getKeyCapInterface(value));
+const top = ['topLine', 'rightTop'] as const;
+const left = ['oneLine', 'twoLine', 'threeLine', 'fourLine', 'fiveLine'] as const;
+const right = ['rightOneLine', 'rightTwoLine', 'rightThreeLine', 'rightFourLine'] as const;
+
+const KeyBoard = ({ state, text, onChangeText, onKeyDown, onKeyUp, onReset, onTextReset, onFocus, onBlur }: ComponentPropsType): JSX.Element => {
+    const [topLine, rightTop]: KeyDataIF[][] = top.map((val) => getKeyCapInterface(val));
+    const [oneLine, twoLine, threeLine, fourLine, fiveLine]: KeyDataIF[][] = left.map((val) => getKeyCapInterface(val));
+    const [rightOneLine, rightTwoLine, rightThreeLine, rightFourLine]: KeyDataIF[][] = right.map((val) => getKeyCapInterface(val));
 
     useEffect(() => {       
         document.addEventListener("keydown", onKeyDown);
@@ -67,15 +75,16 @@ const KeyBoard = ({ state, onKeyDown, onKeyUp, onReset, onFocus, onBlur }: Compo
                 </div>
             </div>
             <div className="keyboard_scan-box">
-                <div className="keyboard_scan-rate_area">
-                    <ul id="keyboard_scan-rate_ul" className="keyboard_scan-rate_ul"></ul>
-                </div>
                 <div className="keyboard_memo_area">
-                    <textarea onFocus={onFocus} onBlur={onBlur}/>
+                    <textarea value={text} onFocus={onFocus} onBlur={onBlur} onChange={onChangeText}/>
+                </div>
+                <div id="keyboard_scan-rate_area" className="keyboard_scan-rate_area">
+                    <ul id="keyboard_scan-rate_ul" className="keyboard_scan-rate_ul"></ul>
                 </div>
             </div>
             <div className="keyboard_button-area">
-                <Button buttonText="Reset" onClick={onReset}/>
+                <Button className="text-reset btn" buttonText="Text Reset" onClick={onTextReset}/>
+                <Button className="all-reset btn" buttonText="All Reset" onClick={onReset}/>
             </div>
         </div>
     )

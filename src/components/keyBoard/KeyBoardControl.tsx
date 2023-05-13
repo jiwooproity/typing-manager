@@ -1,20 +1,27 @@
 import { useState } from "react";
 import { KeyBoard } from "@/components";
 
-const KeyDown = 'keydown' as const;
+import { convertChar } from "@/utils/convertChar";
+
 const SLEFT = 'ShiftLeft' as const;
 const SRIGHT = 'ShiftRight' as const;
 
-type ChangeActiveIF = {
-    code: string,
-    active: boolean
+interface ChangeActiveIF {
+    code: string;
+    active: boolean;
 }
 
 let keyPerformance: { [key: string]: number } = {};
 let inputFocus: boolean = false;
 
 const KeyBoardControl = (): JSX.Element => {
+    const [text, setText] = useState<string>('');
     const [pressedStatus, setPressedStatus] = useState<{ [key: string]: boolean }>({});
+
+    const onChangeText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        const value = e.target.value;
+        setText(value);
+    }
 
     const onChangeActive = ({ code, active }: ChangeActiveIF) => {
         const key = document.getElementById(code);
@@ -52,14 +59,34 @@ const KeyBoardControl = (): JSX.Element => {
         if(!inputFocus) {
             e.preventDefault();
 
+            let keyName = e.code !== 'Space' ? e.key : "SpaceBar";
+
             let upTime = performance.now();
-            let heldTime = Math.ceil(upTime - keyPerformance[e.code]);
+            let heldTime = Math.ceil(upTime - keyPerformance[e.code]);       
             
-            const getTimeAreaElement = document.querySelector('#keyboard_scan-rate_ul');
             const createListElement = document.createElement('li');
-            const performanceContent = document.createTextNode(`${e.code}: ${heldTime}ms`);
-            createListElement.appendChild(performanceContent);
-            getTimeAreaElement.insertBefore(createListElement, getTimeAreaElement.firstChild);
+            const performanceContent = document.createTextNode(`${heldTime}ms`);
+
+            const createButtonElement = document.createElement('button');
+            const createKeyTextElement = document.createElement('span');
+            const createKeyDummyElement = document.createElement('p');
+
+            createKeyTextElement.append(`${convertChar.oneToUpper(keyName)}`);
+            createKeyDummyElement.append(`${convertChar.oneToUpper(keyName)}`);
+
+            createButtonElement.appendChild(createKeyTextElement);
+            createButtonElement.appendChild(createKeyDummyElement);
+
+            createListElement.appendChild(createButtonElement);
+            createListElement.appendChild(performanceContent)
+
+            const getTimeAreaElement = document.querySelector('#keyboard_scan-rate_ul');
+            getTimeAreaElement.appendChild(createListElement);
+            // getTimeAreaElement.insertBefore(createListElement, getTimeAreaElement.firstChild);
+            
+            const getTimeAreaBox = document.querySelector('#keyboard_scan-rate_area');
+            const toTop = getTimeAreaBox.scrollHeight;
+            getTimeAreaBox.scrollTo({ top: toTop, behavior: 'auto' }); 
         }
 
         switch (e.code) {
@@ -78,11 +105,28 @@ const KeyBoardControl = (): JSX.Element => {
 
     // 입력 활성화 초기화
     const onReset = () => {
+        setText('');
         setPressedStatus({});
+        const getTimeAreaElement = document.querySelector('#keyboard_scan-rate_ul');
+        getTimeAreaElement.textContent = '';
+    }
+
+    const onTextReset = () => {
+        setText('');
     }
 
     return (
-        <KeyBoard state={pressedStatus} onKeyDown={onKeyDown} onKeyUp={onKeyUp} onReset={onReset} onFocus={onFocus} onBlur={onBlur}/>
+        <KeyBoard
+            state={pressedStatus}
+            text={text}
+            onChangeText={onChangeText}
+            onKeyDown={onKeyDown}
+            onKeyUp={onKeyUp}
+            onReset={onReset}
+            onTextReset={onTextReset}
+            onFocus={onFocus}
+            onBlur={onBlur}
+        />
     )
 }
 
