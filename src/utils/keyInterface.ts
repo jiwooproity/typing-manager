@@ -470,14 +470,3 @@ export const keyInterface: KeyInterfaceIF = {
 export const getKeyCapInterface = (lineType: string): KeyDataIF[] => {
     return Object.values(keyInterface[lineType]);
 }
-
-export const getKeyInterfaces = (): { [key: string]: KeyDataIF } => {
-    return {
-        ...keyInterface.topLine,
-        ...keyInterface.oneLine,
-        ...keyInterface.twoLine,
-        ...keyInterface.threeLine,
-        ...keyInterface.fourLine,
-        ...keyInterface.rightTop,
-    }
-}
