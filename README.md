@@ -37,7 +37,7 @@ None..
   <img alt="Html" src="https://github.com/jiwooproity/keyboard-checker/assets/58384366/18c63be9-e7d1-47ce-8a87-e857314c1898"/>
 </div>
 
-## 데모 버전 Release 1.2.0 ( setup.exe )
+## 데모 버전 Release 2.0.0
 <div>
-  <a href="https://drive.google.com/file/d/1FC4S93-iRCUaLK0SjYuHQLAnfEk9SJi1/view?usp=sharing" traget="_blank">https://drive.google.com/file/d/1FC4S93-iRCUaLK0SjYuHQLAnfEk9SJi1/view?usp=sharing</a>
+  <a href="https://drive.google.com/file/d/1ZgX7K18THkitKCOuR1cdFAzY8_VngTrY/view?usp=sharing" traget="_blank">Key Test Application - 2.0.0.exe</a>
 </div>
