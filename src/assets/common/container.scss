@@ -7,6 +7,17 @@
         height: 100%;
 
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        
+        .theme_container {
+            width: 1000.84px;
+            margin: 10px 0px 0px 0px;
+        }
+
+        .keyboard_container {
+            display: flex;
+            justify-content: center;
+        }
     }
 }
