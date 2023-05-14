@@ -1,4 +1,54 @@
-@import '../common/container.scss', '../common/keyboard.scss';
+@import '../common/container.scss', '../common/keyboard.scss', '../common/input.scss', '../common/theme.scss';
+
+:root[color-theme='light'] {
+    --main-background: rgb(246, 246, 246);
+    --boxColor: #000;
+    --key-linear-span-start: rgb(255, 255, 255);
+    --key-linear-span-end: rgb(228, 228, 228);
+    --key-linear-start: #ffffff;
+    --key-linear-end: rgb(198, 198, 198);
+    --key-box-shadow: rgba(235, 235, 235, 0.25);
+    --key-border-left: rgba(188, 188, 188, 0.267);
+    --key-border-bottom: rgba(188, 188, 188, 0.267);
+    --key-border-top: rgba(188, 188, 188, 0.6);
+    --key-box-shadow-deg: 180deg;
+    --key-box-shadow-first: rgba(0, 0, 0, 0.15);
+    --key-box-shadow-second: rgba(212, 212, 212, 0.25);
+    --key-box-shadow-third: rgba(212, 212, 212, 0.75);
+    --key-box-shadow-fourth: rgba(212, 212, 212, 0.4);
+    --key-name-color: #000000;
+    --key-border: rgba(150, 150, 150, 1);
+    --key-board-area-background: rgb(206, 206, 206);
+    --key-board-log-background: #eeeeee;
+    --key-board-textarea-background: white;
+    --key-board-reset-linear-hover-start: #c4c4c4;
+    --key-board-reset-linear-hover-end: rgb(141, 141, 141);
+}
+  
+:root[color-theme='dark'] {
+    --main-background: rgb(36, 36, 36);
+    --boxColor: #fff;
+    --key-linear-span-start: #232323;
+    --key-linear-span-end: #4a4a4a;
+    --key-linear-start: #2e2e2e;
+    --key-linear-end: #262626;
+    --key-box-shadow: rgba(235, 235, 235, 0.25);
+    --key-border-left: #0004;
+    --key-border-bottom: #0004;
+    --key-border-top: #0004;
+    --key-box-shadow-deg: 300deg;
+    --key-box-shadow-first: rgba(0, 0, 0, 0.15);
+    --key-box-shadow-second: rgba(0, 0, 0, 0.25);
+    --key-box-shadow-third: rgba(0, 0, 0, 0.75);
+    --key-box-shadow-fourth: rgba(0, 0, 0, 0.4);
+    --key-name-color: #ffffff;
+    --key-border: rgb(23, 23, 23);
+    --key-board-area-background: #0005;
+    --key-board-log-background: rgba(70, 70, 70, 0.333);
+    --key-board-textarea-background: #0005;
+    --key-board-reset-linear-hover-start: #171717;
+    --key-board-reset-linear-hover-end: rgb(23, 23, 23);
+}
 
 * {
     margin: 0px;
@@ -7,5 +57,5 @@
 }
 
 body {
-    background-color: #e1e1e1;
+    background-color: var(--main-background);
 }
