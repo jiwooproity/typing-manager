@@ -11,9 +11,12 @@
         justify-content: center;
         align-items: center;
         
-        .theme_container {
+        .navigation_container {
             width: 1000.84px;
             margin: 10px 0px 0px 0px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .keyboard_container {
