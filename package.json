@@ -1,86 +1,30 @@
 {
   "name": "keyboard-checker",
-  "version": "2.1.4",
-  "description": "You can test your keyboard key input",
-  "main": "public/Main.js",
-  "homepage": "./",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "start": "webpack-dev-server --open --config ./config/webpack.dev.js",
-    "build": "webpack --config ./config/webpack.prod.js",
-    "deploy:osx": "electron-builder --win --mac",
-    "deploy:win64": "electron-builder --win nsis:x64",
-    "electron-start": "electron ."
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
-  "build": {
-    "productName": "KeyBoard - Key Test",
-    "appId": "net.jetalab.ex.startelectron",
-    "asar": true,
-    "dmg": {
-      "title": "KeyBoard - Key Test"
-    },
-    "mac": {
-      "target": [
-        "default"
-      ]
-    },
-    "win": {
-      "target": [
-        {
-          "target": "nsis",
-          "arch": [
-            "x64",
-            "ia32"
-          ]
-        }
-      ],
-      "icon": "build/icons/256x256.png"
-    },
-    "nsis": {
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": false,
-      "createDesktopShortcut": true
-    },
-    "directories": {
-      "buildResources": "./resources/installer/",
-      "output": "./dist/",
-      "app": "."
-    }
-  },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "core-js": "^3.30.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.10.0",
-    "typescript": "^5.0.4"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.21.0",
-    "@babel/core": "^7.21.4",
-    "@babel/preset-env": "^7.21.4",
-    "@babel/preset-react": "^7.18.6",
-    "@babel/preset-typescript": "^7.21.4",
-    "@types/react": "^18.2.6",
-    "@types/react-dom": "^18.2.4",
-    "babel-loader": "^9.1.2",
-    "clean-webpack-plugin": "^4.0.0",
-    "css-loader": "^6.7.3",
-    "css-minimizer-webpack-plugin": "^5.0.0",
-    "dotenv": "^16.0.3",
-    "electron": "^24.2.0",
-    "electron-builder": "^23.6.0",
-    "html-webpack-plugin": "^5.5.1",
-    "mini-css-extract-plugin": "^2.7.5",
-    "node-sass": "^8.0.0",
-    "sass": "^1.62.0",
-    "sass-loader": "^13.2.2",
-    "style-loader": "^3.3.2",
-    "terser-webpack-plugin": "^5.3.7",
-    "webpack": "^5.82.0",
-    "webpack-cli": "^5.0.1",
-    "webpack-dev-server": "^4.13.3",
-    "webpack-merge": "^5.8.0",
-    "wepback": "^1.0.0"
-  }
+    "@eslint/js": "^9.9.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "eslint": "^9.9.0",
+    "eslint-plugin-react-hooks": "^5.1.0-rc.0",
+    "eslint-plugin-react-refresh": "^0.4.9",
+    "globals": "^15.9.0",
+    "typescript": "^5.5.3",
+    "typescript-eslint": "^8.0.1",
+    "vite": "^5.4.1"
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

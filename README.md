@@ -1,34 +1,50 @@
-## 키보드 테스트 애플리케이션
+# React + TypeScript + Vite
 
-키보드 입력 테스트가 가능한 데스크탑 애플리케이션입니다.   
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Webpack5, React와 Electron으로 개발되고 있는 애플리케이션이며, 피드백을 통해 업데이트를 진행하고 있습니다.    
+Currently, two official plugins are available:
 
-## 현재 기능
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-1. 키 입력 테스트 ( 가상 키보드 화면 입력 표기 )
-2. 일렉트론 - 데스크탑 애플리케이션 설치 가능
-3. 키 눌림 시간 확인 기능 ( 끊김 현상 등 확인을 위한 기능 )
-4. 메모장 입력 기능 ( 작성 입력 테스트 )
+## Expanding the ESLint configuration
 
-## 라이브러리 & 프레임워크
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-<div style="display: flex">
-  <img alt="Html" src ="https://img.shields.io/badge/react-61DAFB.svg?&style=for-the-badge&logo=React&logoColor=white"/>
-  <img alt="Html" src ="https://img.shields.io/badge/electron-47848F.svg?&style=for-the-badge&logo=Electron&logoColor=white"/>
-  <img alt="Html" src ="https://img.shields.io/badge/webpack5-8DD6F9.svg?&style=for-the-badge&logo=Webpack&logoColor=white"/>
-</div>
+- Configure the top-level `parserOptions` property like this:
 
-## 키보드 테스트 애플리케이션 - 2.1.0
+```js
+export default tseslint.config({
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
+```
 
-<div>
-  <img alt="html" src="https://github.com/jiwooproity/keyboard-checker/assets/58384366/141274dc-377f-4225-9f7f-447b50af440b"/>
-</div>
+- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
+- Optionally add `...tseslint.configs.stylisticTypeChecked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
 
-## 데모 버전 2.1.0
+```js
+// eslint.config.js
+import react from 'eslint-plugin-react'
 
-<div>
-  <a href="https://fluffy-meringue-43bd0f.netlify.app/" target="_blank" >웹 데모 버전</a>
-  <br/>
-  <a href="https://github.com/jiwooproity/keyboard-checker/releases" traget="_blank">데스크탑 애플리케이션 설치</a>
-</div>
+export default tseslint.config({
+  // Set the react version
+  settings: { react: { version: '18.3' } },
+  plugins: {
+    // Add the react plugin
+    react,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended rules
+    ...react.configs.recommended.rules,
+    ...react.configs['jsx-runtime'].rules,
+  },
+})
+```

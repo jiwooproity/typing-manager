@@ -1,7 +1,5 @@
-import { Container } from "@/components";
-
-const App = () => {
-  return <Container />
-};
+function App() {
+  return <div></div>;
+}
 
 export default App;
