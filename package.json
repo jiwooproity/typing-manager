@@ -1,18 +1,17 @@
 {
-  "homepage": "./",
+  "homepage": ".",
   "name": "typing-manager",
   "main": "start/electron.js",
   "private": true,
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "preview": "vite preview",
+    "react-dev": "vite",
+    "react-build": "tsc -b && vite build",
     "lint": "eslint .",
-    "start": "concurrently \"cross-env NODE_ENV=development BROWSER=none yarn run dev\" \"wait-on http://localhost:5173 && electron .\"",
-    "electron-build": "yarn run build && electron-builder",
-    "electron:win": "yarn run build && electron-builder --win --x64"
+    "electron": "wait-on http://localhost:5173 && electron .",
+    "dev": "concurrently \"cross-env NODE_ENV=development BROWSER=none yarn run react-dev\" \"yarn run electron\"",
+    "build": "yarn react-build && electron-builder"
   },
   "dependencies": {
     "electron-is-dev": "^3.0.1",

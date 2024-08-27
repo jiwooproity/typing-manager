@@ -1,58 +1,57 @@
-import * as path from "path";
+import * as path from "node:path";
+import { fileURLToPath } from "node:url";
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 import isDev from "electron-is-dev";
-import { app, BrowserWindow } from "electron";
+import { BrowserWindow, app } from "electron";
 
 let electron = null;
 
+// It need to use this If electron running on development.
+const DEV_URL = "http://localhost:5173";
+
 class CreateWindow extends BrowserWindow {
-  constructor(options) {
-    super(options);
+  constructor(width, height, options) {
+    super({ width, height, ...options });
   }
 
-  setLoadUrl(array) {
-    this.loadURL(array[isDev ? 0 : 1]);
-  }
-
-  setDevTools(mode) {
+  setScreen() {
     if (isDev) {
-      this.webContents.openDevTools({ mode });
+      this.loadURL(DEV_URL);
+      this.webContents.openDevTools({ mode: "detach" });
+    } else {
+      this.loadFile(path.join(__dirname, "../dist/index.html"));
     }
   }
 }
 
-app.on("ready", () => {
-  createWindow();
-});
+function createWindow() {
+  electron = new CreateWindow(1200, 900, {
+    devTools: isDev,
+    nodeIntegration: true,
+    preload: path.join(__dirname, "preload.js"),
+    resizable: true,
+  });
 
-app.on("activate", () => {
-  if (electron === null) createWindow();
+  electron.setScreen();
+}
+
+app.whenReady().then(() => {
+  createWindow();
+
+  app.on("activate", () => {
+    if (CreateWindow.getAllWindows().length === 0) {
+      createWindow();
+    }
+  });
 });
 
 app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") app.quit();
+  if (process.platform !== "darwin") {
+    app.quit();
+  }
 });
 
-const closed = () => {
-  electron = null;
-  app.quit();
-};
-
-const LOCAL = "http://localhost:5173";
-const PROD = `file://${path.join(path.resolve(), "../dist/index.html")}`;
-
-function createWindow() {
-  electron = new CreateWindow({
-    width: 900,
-    height: 680,
-    webPreferences: {
-      nodeIntegration: true,
-      devTools: isDev,
-    },
-  });
-
-  electron.setLoadUrl([LOCAL, PROD]);
-  electron.setResizable(true);
-  electron.setDevTools("detach");
-  electron.on("closed", closed);
-  electron.focus();
-}
+process.on("uncaughtException", function (err) {
+  console.log(err);
+});
