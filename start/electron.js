@@ -23,22 +23,25 @@ class CreateWindow extends BrowserWindow {
 function createWindow() {
     electron = new CreateWindow(1200, 900, {
         devTools: isDev,
-        preload: path.join(__dirname, "preload.js"),
+        preload: path.join(__dirname, "preload.js"), // It can't use the nodeJS enviroment from electron 20.x onwards.
         nodeIntegration: true,
     });
     electron.setResizable(true);
     electron.setScreen(isDev);
 }
-app.whenReady().then(() => {
-    createWindow();
-    app.on("activate", () => {
-        if (CreateWindow.getAllWindows().length === 0) {
-            createWindow();
-        }
-    });
-});
-app.on("window-all-closed", () => {
+function windowAllClosed() {
     if (process.platform !== "darwin") {
         app.quit();
     }
-});
+}
+function activate() {
+    if (CreateWindow.getAllWindows().length === 0) {
+        createWindow();
+    }
+}
+function start() {
+    createWindow();
+    app.on("activate", activate);
+}
+app.whenReady().then(start);
+app.on("window-all-closed", windowAllClosed);

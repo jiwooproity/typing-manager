@@ -39,18 +39,22 @@ function createWindow() {
   electron.setScreen(isDev);
 }
 
-app.whenReady().then(() => {
-  createWindow();
-
-  app.on("activate", () => {
-    if (CreateWindow.getAllWindows().length === 0) {
-      createWindow();
-    }
-  });
-});
-
-app.on("window-all-closed", () => {
+function windowAllClosed() {
   if (process.platform !== "darwin") {
     app.quit();
   }
-});
+}
+
+function activate() {
+  if (CreateWindow.getAllWindows().length === 0) {
+    createWindow();
+  }
+}
+
+function start() {
+  createWindow();
+  app.on("activate", activate);
+}
+
+app.whenReady().then(start);
+app.on("window-all-closed", windowAllClosed);
