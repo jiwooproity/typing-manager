@@ -1,5 +1,7 @@
+import { HashRouter } from "react-router-dom";
+
 function App() {
-  return <div>Hello Electron!!!!</div>;
+  return <HashRouter>Hi</HashRouter>;
 }
 
 export default App;
