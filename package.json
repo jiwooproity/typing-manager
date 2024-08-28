@@ -11,6 +11,7 @@
     "build:electron": "yarn run build:core && yarn build:react && electron-builder",
     "build:core": "tsc ./start/electron.ts --outdir start --module nodenext --target es6",
     "electron": "wait-on http://localhost:5173 && electron .",
+    "test": "vitest --coverage --typecheck",
     "lint": "eslint ."
   },
   "dependencies": {
@@ -20,10 +21,15 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.5.0",
+    "@testing-library/react": "^16.0.0",
+    "@testing-library/user-event": "^14.5.2",
     "@types/node": "^22.5.0",
-    "@types/react": "^18.3.3",
+    "@types/react": "^18.3.4",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
+    "@vitest/coverage-istanbul": "^2.0.5",
     "concurrently": "^8.2.2",
     "cross-env": "^7.0.3",
     "electron": "^32.0.1",
@@ -33,9 +39,11 @@
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
+    "jsdom": "^25.0.0",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1",
+    "vitest": "^2.0.5",
     "wait-on": "^8.0.0"
   },
   "build": {
