@@ -31,7 +31,7 @@ class CreateWindow extends BrowserWindow {
 function createWindow() {
   electron = new CreateWindow(1200, 900, {
     devTools: isDev,
-    // preload: path.join(__dirname, "preload.js"),
+    preload: path.join(__dirname, "preload.js"), // It can't use the nodeJS enviroment from electron 20.x onwards.
     nodeIntegration: true,
   });
 

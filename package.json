@@ -9,7 +9,7 @@
     "build:react": "tsc -b && vite build --out-dir build",
     "dev:electron": "concurrently \"cross-env NODE_ENV=development BROWSER=none yarn run dev:react\" \"yarn run electron\"",
     "build:electron": "yarn run build:core && yarn build:react && electron-builder",
-    "build:core": "tsc ./start/electron.ts --outdir start --module nodenext --target es6",
+    "build:core": "tsc ./start/*.ts --outdir start --module nodenext --target es6",
     "electron": "wait-on http://localhost:5173 && electron .",
     "test": "vitest --coverage --typecheck",
     "lint": "eslint ."
