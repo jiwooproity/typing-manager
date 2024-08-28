@@ -1,0 +1,10 @@
+.case-container {
+  padding: 15px;
+}
+
+.case-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+}

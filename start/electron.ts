@@ -29,18 +29,14 @@ class CreateWindow extends BrowserWindow {
 }
 
 function createWindow() {
-  try {
-    electron = new CreateWindow(1200, 900, {
-      devTools: isDev,
-      // preload: path.join(__dirname, "preload.js"),
-      nodeIntegration: true,
-    });
+  electron = new CreateWindow(1200, 900, {
+    devTools: isDev,
+    // preload: path.join(__dirname, "preload.js"),
+    nodeIntegration: true,
+  });
 
-    electron.setResizable(true);
-    electron.setScreen(isDev);
-  } catch (e) {
-    console.log(e);
-  }
+  electron.setResizable(true);
+  electron.setScreen(isDev);
 }
 
 app.whenReady().then(() => {
