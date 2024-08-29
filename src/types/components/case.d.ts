@@ -1,12 +1,13 @@
 interface CaseProps {
-  layouts: UnitType[][];
+  layouts: UnitLayoutsType[][];
   children: (args: LineChildrenArgsProps) => JSX.Element[];
 }
 
 interface LineChildrenArgsProps {
-  layout: UnitType[];
+  layout: UnitLayoutsType[];
 }
 
 interface LineProps {
+  line: number;
   children: ReactNode;
 }

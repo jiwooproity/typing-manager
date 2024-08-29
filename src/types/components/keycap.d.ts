@@ -1,4 +1,4 @@
 interface KeycapProps {
-  text: UnitType;
+  text: string;
   size: UnitType;
 }

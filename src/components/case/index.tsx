@@ -1,8 +1,8 @@
 import "./case.css";
 
-function Line({ children }: LineProps) {
+function Line({ line, children }: LineProps) {
   return (
-    <div className="case-line" data-testId="case-line">
+    <div className="case-line" data-testid={`case-line-${line}`}>
       {children}
     </div>
   );
@@ -10,9 +10,11 @@ function Line({ children }: LineProps) {
 
 export function Case({ layouts, children }: CaseProps) {
   return (
-    <div className="case-container" data-testId="case-container">
+    <div className="case-container" data-testid="case-container">
       {layouts.map((layout, index) => (
-        <Line key={index}>{children({ layout })}</Line>
+        <Line line={index} key={`line-${index}`}>
+          {children({ layout })}
+        </Line>
       ))}
     </div>
   );

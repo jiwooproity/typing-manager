@@ -1,16 +1,15 @@
 import { HashRouter } from "react-router-dom";
 
 import { Case, Keycap } from "@/components";
-
-const LAYOUTS: UnitType[][] = [
-  ["1u", "1u", "1u", "1u", "1u", "1u", "1u", "1u", "1u", "1u", "1u", "1u", "1u", "2u", "1u"],
-];
+import { UNIT_LAYOUTS } from "@/sample";
 
 function App() {
   return (
     <HashRouter>
-      <Case layouts={LAYOUTS}>
-        {({ layout }) => layout.map((key) => <Keycap size={key} text={key} />)}
+      <Case layouts={UNIT_LAYOUTS as UnitLayoutsType[][]}>
+        {({ layout }) =>
+          layout.map((key) => <Keycap key={`keycap-${key.id}`} size={key.size} text={key.text} />)
+        }
       </Case>
     </HashRouter>
   );

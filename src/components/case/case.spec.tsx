@@ -2,35 +2,42 @@ import { describe, expect, it } from "vitest";
 import { render, screen } from "@testing-library/react";
 
 import { calcDoubleLength } from "@/utils";
+import { UNIT_LAYOUTS } from "@/sample";
 
 import { Case } from ".";
 
 describe("case.tsx", () => {
-  const TEST_LAYOUT: UnitType[][] = [
-    ["1u", "1u", "1u", "1u", "1u", "1u", "1u", "1u", "1u", "1u", "1u", "1u", "1u", "2u", "1u"],
-  ];
-
   it("should case component to contain case line components", () => {
     render(
-      <Case layouts={TEST_LAYOUT}>{({ layout }) => layout.map((key) => <span>{key}</span>)}</Case>
+      <Case layouts={UNIT_LAYOUTS as UnitLayoutsType[][]}>
+        {({ layout }) => layout.map((key) => <span>{key.text}</span>)}
+      </Case>
     );
 
     const container = screen.getByTestId("case-container");
     expect(container).toBeInTheDocument();
 
-    const caseLine = screen.getByTestId("case-line");
-    expect(container).toContainElement(caseLine);
+    UNIT_LAYOUTS.forEach((_, index) => {
+      const caseLine = screen.getByTestId(`case-line-${index}`);
+      expect(container).toContainElement(caseLine);
+    });
   });
 
   it("should renderer line components of layout keys", () => {
     render(
-      <Case layouts={TEST_LAYOUT}>{({ layout }) => layout.map((key) => <span>{key}</span>)}</Case>
+      <Case layouts={UNIT_LAYOUTS as UnitLayoutsType[][]}>
+        {({ layout }) => layout.map((key) => <span>{key.text}</span>)}
+      </Case>
     );
 
-    const caseLine = screen.getByTestId("case-line");
-    expect(caseLine).toBeInTheDocument();
+    UNIT_LAYOUTS.forEach((_, index) => {
+      const caseLine = screen.getByTestId(`case-line-${index}`);
+      expect(caseLine).toBeInTheDocument();
+    });
 
-    const keys = caseLine.getElementsByTagName("span");
-    expect(keys).toHaveLength(calcDoubleLength(TEST_LAYOUT));
+    const container = screen.getByTestId("case-container");
+    const keys = container.getElementsByTagName("span");
+
+    expect(keys).toHaveLength(calcDoubleLength(UNIT_LAYOUTS));
   });
 });
