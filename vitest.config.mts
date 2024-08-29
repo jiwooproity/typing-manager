@@ -9,7 +9,7 @@ export default defineConfig({
     name: packageJson.name,
     globals: true,
     environment: "jsdom",
-    setupFiles: "src/test/setup.ts",
+    setupFiles: "src/plugin/setup.ts",
     coverage: {
       provider: "istanbul",
       include: ["src/**/*.spec.ts", "src/**/*.spec.tsx"],
