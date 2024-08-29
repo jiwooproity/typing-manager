@@ -1,5 +1,10 @@
 interface CaseProps {
-  children: ReactNode;
+  layouts: UnitType[][];
+  children: (args: LineChildrenArgsProps) => JSX.Element[];
+}
+
+interface LineChildrenArgsProps {
+  layout: UnitType[];
 }
 
 interface LineProps {

@@ -9,14 +9,8 @@ const LAYOUTS: UnitType[][] = [
 function App() {
   return (
     <HashRouter>
-      <Case>
-        {LAYOUTS.map((layout) => (
-          <Case.Line>
-            {layout.map((key) => (
-              <Keycap text={key} size={key} />
-            ))}
-          </Case.Line>
-        ))}
+      <Case layouts={LAYOUTS}>
+        {({ layout }) => layout.map((key) => <Keycap size={key} text={key} />)}
       </Case>
     </HashRouter>
   );
