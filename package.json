@@ -12,7 +12,8 @@
     "build:core": "tsc ./start/*.ts --outdir start --module nodenext --target es6",
     "electron": "wait-on http://localhost:5173 && electron .",
     "test": "vitest --coverage --typecheck",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "open": "open 'https://github.com/jiwooproity/typing-manager'"
   },
   "dependencies": {
     "react": "^18.3.1",
