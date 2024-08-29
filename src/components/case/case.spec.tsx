@@ -10,7 +10,7 @@ describe("case.tsx", () => {
   it("should case component to contain case line components", () => {
     render(
       <Case layouts={UNIT_LAYOUTS as UnitLayoutsType[][]}>
-        {({ layout }) => layout.map((key) => <span>{key.text}</span>)}
+        {({ layout }) => layout.map((key) => <span key={key.id}>{key.text}</span>)}
       </Case>
     );
 
@@ -26,7 +26,7 @@ describe("case.tsx", () => {
   it("should renderer line components of layout keys", () => {
     render(
       <Case layouts={UNIT_LAYOUTS as UnitLayoutsType[][]}>
-        {({ layout }) => layout.map((key) => <span>{key.text}</span>)}
+        {({ layout }) => layout.map((key) => <span key={key.id}>{key.text}</span>)}
       </Case>
     );
 
