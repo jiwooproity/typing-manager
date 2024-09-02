@@ -4,7 +4,7 @@ interface CaseChildFuncProps {
 
 interface CaseProps {
   layouts: UnitLayoutsType[][];
-  children: (args: LineChildrenArgsProps) => JSX.Element[];
+  children: (args: CaseChildFuncProps) => JSX.Element[];
 }
 
 interface LineProps {
